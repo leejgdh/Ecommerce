@@ -3,7 +3,34 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
+    "compounds": [
+        {
+            "name": "Ecormmerce",
+            "configurations": ["EcormmerceApi","EcormmerceWeb"]
+        }
+     ],
     "configurations": [
+        {
+            "name": "EcormmerceApi",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/EcormmerceApi/bin/Debug/net5.0/EcormmerceApi.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/EcormmerceApi",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "https://localhost:5001"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/EcormmerceApi"
+            }
+        },
         {
             "name": "EcormmerceWeb",
             "type": "coreclr",
@@ -18,7 +45,8 @@
                 "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "https://localhost:5002"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/EcormmerceWeb/Views"
