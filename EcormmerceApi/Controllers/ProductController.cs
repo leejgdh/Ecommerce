@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ecormmerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -13,11 +14,16 @@ namespace EcormmerceApi.Controllers
     public class ProductController : ControllerBase
     {
         private readonly ILogger<ProductController> _logger;
+
+        private readonly IProductService _productService;
+
         public ProductController(
-            ILogger<ProductController> logger
+            ILogger<ProductController> logger,
+            IProductService productService
         )
         {
             _logger = logger;
+            _productService = productService;
         }
 
 
@@ -27,6 +33,15 @@ namespace EcormmerceApi.Controllers
         {
             return Ok(true);
         }
+
+        // [HttpPost]
+        // public async Task<IActionResult> InsertAsync(Product request){
+
+        //     await _productService.InsertAsync(request);
+
+        //     return Ok(request);
+
+        // }
 
     }
 }

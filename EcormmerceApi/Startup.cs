@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ecormmerce.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.Azure.Cosmos;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace EcormmerceApi
 {
@@ -27,11 +33,37 @@ namespace EcormmerceApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers()
+            .AddNewtonsoftJson(options =>
+           {
+               options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+               options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+               options.SerializerSettings.Converters.Add(new StringEnumConverter());
+           })
+           .AddJsonOptions(options =>
+           {
+               options.JsonSerializerOptions.PropertyNamingPolicy = null;
+               options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+               options.JsonSerializerOptions.IgnoreNullValues = true;
+           });
+
+            services.AddDbContext<EcormmerceContext>(opt => 
+            opt.UseCosmos(
+                Configuration["CosmosConnection:AccountEndPoint"],
+                Configuration["CosmosConnection:AccountKey"],
+                Configuration["CosmosConnection:DatabaseName"]
+                ));
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EcormmerceApi", Version = "v1" });
             });
+
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IShopService, ShopService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

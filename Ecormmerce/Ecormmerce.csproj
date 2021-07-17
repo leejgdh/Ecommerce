@@ -4,5 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="DHSoft.Helper" Version="0.0.8"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="5.0.8"/>
   </ItemGroup>
 </Project>

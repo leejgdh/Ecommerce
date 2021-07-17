@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Helper.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -11,6 +13,7 @@ namespace Ecormmerce.Models
     public class Product
     {
         [Key]
+        [JsonProperty("id")]
         public Guid Id { get; set; }
         
         [Required(ErrorMessage = "{0}은 필수 입력값입니다.")]
@@ -50,24 +53,29 @@ namespace Ecormmerce.Models
         [Display(Name = "상품의 무게", Description = "판매 상품의 무게입니다.")]
         public double? Weight { get; set; }
 
+        [NotMapped]
         [Display(Name = "상품의 썸네일 이미지 URL입니다.")]
-        public IEnumerable<string> ThumbnailImageUrls { get; set; }
+        public IList<string> ThumbnailImageUrls { get; set; }
 
         [Display(Name = "옵션 타입")]
         [EnumDataType(typeof(EVariationType))]
         [JsonConverter(typeof(StringEnumConverter))]
         public EVariationType? VariationType { get; set; }
 
+        [NotMapped]
         [Display(Name = "옵션명")]
-        public IEnumerable<string> VariationGroups { get; set; }
+        public IList<string> VariationGroups { get; set; }
 
-        public IEnumerable<string> ImageUrls { get; set; }
+        [NotMapped]
+        public IList<string> ImageUrls { get; set; }
 
+        [NotMapped]
         [Display(Name = "옵션")]
-        public IEnumerable<Variation> Variations { get; set; }
+        public IList<Variation> Variations { get; set; }
 
         [Required(ErrorMessage = "{0}은 필수 입력값입니다.")]
         [Display(Name = "카테고리 아이디", Description = "상품의 카테고리")]
+        [JsonConverter(typeof(StringConverter))]
         public Guid CategoryId { get; set; }
         
         [Required]

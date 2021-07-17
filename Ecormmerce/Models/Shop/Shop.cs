@@ -10,17 +10,19 @@ namespace Ecormmerce.Models
 
     public class Shop
     {
-
+        [Key]
         public Guid Id { get; set; }
 
         public string Name { get; set; }
 
-        [EnumDataType(typeof(ECurrency))]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ECountry Country { get; set; }
+        // [EnumDataType(typeof(ECurrency))]
+        // [JsonConverter(typeof(StringEnumConverter))]
+        // public ECountry Country { get; set; }
+
+        public string BizNum { get; set; }
 
 
-        public IEnumerable<Product> Products { get; set; }
+        //public IEnumerable<Product> Products { get; set; }
 
 
 
