@@ -12,9 +12,12 @@ namespace EcormmerceApi.Controllers
     [Route("[controller]/api")]
     public class ProductController : ControllerBase
     {
-        public ProductController()
+        private readonly ILogger<ProductController> _logger;
+        public ProductController(
+            ILogger<ProductController> logger
+        )
         {
-            
+            _logger = logger;
         }
 
 
