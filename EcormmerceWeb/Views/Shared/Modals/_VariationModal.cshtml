@@ -1,0 +1,94 @@
+@model EcormmerceWeb.Models.ViewModels.Modals.VariationViewModel
+
+<div id="VariationModal" class="modal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Variation </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="Name"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control form-control-sm" asp-for="Name">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-outline-secondary" type="button">중복확인</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Sku"></label>
+                <span asp-validation-for="Sku" class="text-danger"></span>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control form-control-sm" asp-for="Sku">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-outline-secondary" type="button">중복확인</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="BasePrice"></label>
+                <span asp-validation-for="BasePrice" class="text-danger"></span>
+                <input type="text" class="form-control form-control-sm" asp-for="BasePrice">
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Price"></label>
+                <span asp-validation-for="Price" class="text-danger"></span>
+                <input type="text" class="form-control form-control-sm" asp-for="Price">
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="DiscountRate"></label>
+                <span asp-validation-for="DiscountRate" class="text-danger"></span>
+                <input type="text" class="form-control form-control-sm" asp-for="DiscountRate">
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="DiscountPrice"></label>
+                <span asp-validation-for="DiscountPrice" class="text-danger"></span>
+                <input type="text" class="form-control form-control-sm" asp-for="DiscountPrice">
+            </div>
+        </div>
+
+        <hr>
+        <h4 class="text-primary">배송</h4>
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="LogisticPrice"></label>
+                <span asp-validation-for="LogisticPrice" class="text-danger"></span>
+                <input type="text" class="form-control form-control-sm" asp-for="LogisticPrice">
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Weight"></label>
+                <span asp-validation-for="Weight" class="text-danger"></span>
+                <input type="text" class="form-control form-control-sm" asp-for="Weight">
+            </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary">저장</button>
+      </div>
+    </div>
+  </div>
+</div>

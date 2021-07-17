@@ -1,0 +1,197 @@
+@model EcormmerceWeb.Models.ViewModels.Product.DetailViewModel
+
+<div class="card">
+
+    <div class="card-header d-flex justify-content-between align-items-middle">
+
+        <h4 class="text-primary">@ViewData["Title"]</h4>
+
+        <div class="btn-group">
+        </div>
+
+    </div>
+
+    <form class="card-body">
+
+        <div class="form-group row">
+            <div class="col-md-4">
+                <label asp-for="Name"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control form-control-sm" asp-for="Name">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-outline-secondary" type="button">중복확인</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="Sku"></label>
+                <span asp-validation-for="Sku" class="text-danger"></span>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control form-control-sm" asp-for="Sku">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-outline-secondary" type="button">중복확인</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label asp-for="CategoryName"></label>
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+                <input type="text" class="form-control form-control-sm" asp-for="CategoryName">
+            </div>
+
+
+            <input type="hidden" asp-for="CategoryId">
+        </div>
+
+        <hr>
+
+        <h3 class="text-primary">가격 정보</h3>
+
+
+        <div class="form-group row">
+            <div class="col-md-3">
+
+                <label asp-for="BasePrice"></label>
+                <span asp-validation-for="BasePrice" class="text-danger"></span>
+
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control text-right" asp-for="BasePrice">
+                    <div class="input-group-append">
+                        <span class="input-group-text">원</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="Price"></label>
+                <span asp-validation-for="Price" class="text-danger"></span>
+
+
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control text-right" asp-for="Price">
+                    <div class="input-group-append">
+                        <span class="input-group-text">원</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="DiscountRate"></label>
+                <span asp-validation-for="Price" class="text-danger"></span>
+
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control text-right" asp-for="DiscountRate">
+                    <div class="input-group-append">
+                        <span class="input-group-text">원</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="DiscountPrice"></label>
+                <span asp-validation-for="DiscountPrice" class="text-danger"></span>
+
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control text-right" asp-for="DiscountPrice">
+                    <div class="input-group-append">
+                        <span class="input-group-text">원</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+
+                <label asp-for="LogisticPrice"></label>
+                <span asp-validation-for="LogisticPrice" class="text-danger"></span>
+
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control text-right" asp-for="LogisticPrice">
+                    <div class="input-group-append">
+                        <span class="input-group-text">원</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <span asp-validation-for="Description" class="text-danger"></span>
+            <textarea class="form-control form-control-sm" asp-for="Description" rows="10"></textarea>
+        </div>
+
+        <h3 class="text-primary">옵션 정보</h3>
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="VariationType"></label>
+                <span asp-validation-for="VariationType" class="text-danger"></span>
+                <select asp-for="VariationType" class="form-control form-control-sm"
+                    asp-items="Model.VariationTypes"></select>
+            </div>
+
+            <div class="col-md-6">
+                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#VariationModal">옵션</button>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>옵션명</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>옵션명</th>
+                                <th>옵션상품명</th>
+                                <th>옵션SKU</th>
+                                <th>가격</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <button class="btn btn-block btn-primary">저장</button>
+        </div>
+
+    </form>
+
+</div>
+
+<partial name="Modals/_VariationModal" model="new EcormmerceWeb.Models.ViewModels.Modals.VariationViewModel()" />
+
+@section Scripts{
+
+<script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
