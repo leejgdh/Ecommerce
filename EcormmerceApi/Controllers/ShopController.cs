@@ -10,7 +10,7 @@ namespace EcormmerceApi.Controllers
 {
 
     [ApiController]
-    [Route("[controller]/api")]
+    [Route("api/[controller]")]
     public class ShopController : ControllerBase
     {
         private readonly ILogger<ShopController> _logger;

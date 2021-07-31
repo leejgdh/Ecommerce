@@ -10,7 +10,7 @@ namespace EcormmerceApi.Controllers
 {
 
     [ApiController]
-    [Route("[controller]/api")]
+    [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
         private readonly ILogger<ProductController> _logger;
@@ -28,10 +28,19 @@ namespace EcormmerceApi.Controllers
 
 
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{Id}")]
+        public IActionResult Get([FromRoute] Guid Id)
         {
-            return Ok(true);
+            var entity = _productService.Get(Id);
+            return Ok(entity);
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+
+            var entities = _productService.GetAll();
+            return Ok(entities);
         }
 
         /// <summary>
@@ -42,19 +51,51 @@ namespace EcormmerceApi.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertAsync([FromBody] Product product)
         {
-            await _productService.InsertAsync(product);
+            var result = await _productService.InsertAsync(product);
 
-            return NoContent();
+            if (result.IsSuccess)
+            {
+                return CreatedAtAction(nameof(Get), new { Id = result.Result.Id }, result.Result);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
 
-        // [HttpPost]
-        // public async Task<IActionResult> InsertAsync(Product request){
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> UpdateAsync([FromRoute] Guid Id, Product product)
+        {
 
-        //     await _productService.InsertAsync(request);
+            var result = await _productService.UpdateAsync(product);
 
-        //     return Ok(request);
+            if (result.IsSuccess)
+            {
+                return AcceptedAtAction(nameof(Get), new { id = result.Result.Id }, result.Result);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+        }
 
-        // }
 
+        [HttpDelete("Id")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] Guid Id)
+        {
+
+            var result = await _productService.DeleteAsync(Id);
+
+            if (result.IsSuccess)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
+
+        }
     }
 }

@@ -13,7 +13,6 @@ namespace Ecormmerce.Models
     public class Product
     {
         [Key]
-        [JsonProperty("id")]
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "{0}은 필수 입력값입니다.")]
