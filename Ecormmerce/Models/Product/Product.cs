@@ -93,8 +93,6 @@ namespace Ecormmerce.Models
             public double Height { get; set; }
         }
 
-
-
         public class _Variation
         {
             
