@@ -5,6 +5,6 @@ namespace Ecormmerce.Models
 
     public interface IProductService
     {
-        //Task InsertAsync(Product product);
+        Task InsertAsync(Product product);
     }
 }

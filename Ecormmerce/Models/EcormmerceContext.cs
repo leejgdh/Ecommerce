@@ -1,7 +1,10 @@
 using System;
 using System.Net;
+using Helper.Enums;
 using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Newtonsoft.Json.Converters;
 
 namespace Ecormmerce.Models
 {
@@ -20,6 +23,8 @@ namespace Ecormmerce.Models
 
         public DbSet<Shop> Shops { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +39,38 @@ namespace Ecormmerce.Models
             modelBuilder.Entity<Shop>()
             .ToContainer("Shops")
             .HasPartitionKey(nameof(Shop.BizNum));
+
+
+            modelBuilder.Entity<Product>()
+            .ToContainer("Products")
+            .HasPartitionKey(nameof(Product.ShopId));
+
+            modelBuilder.Entity<Product>()
+            .Property(e => e.Currency)
+            .HasConversion(new EnumToStringConverter<ECurrency>())
+            .HasMaxLength(5);
+
+
+            modelBuilder.Entity<Product>()
+            .Property(e => e.VariationType)
+            .HasConversion(new EnumToStringConverter<EVariationType>())
+            .HasMaxLength(20);
+
+
+            modelBuilder.Entity<Product>()
+            .Property(e => e.CategoryId)
+            .HasConversion(new GuidToStringConverter());
+
+            modelBuilder.Entity<Product>()
+            .Property(e => e.ShopId)
+            .HasConversion(new GuidToStringConverter());
+
+            modelBuilder.Entity<Product>()
+            .OwnsOne(e => e.Dimention);
+
+            modelBuilder.Entity<Product>()
+            .OwnsMany(e => e.Variations)
+            .OwnsMany(e => e.ImageUrls);
 
             // modelBuilder.Entity<Category>()
             // .HasPartitionKey(nameof(Category.ParentId));

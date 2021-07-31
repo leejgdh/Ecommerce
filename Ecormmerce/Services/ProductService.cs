@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
@@ -18,6 +19,22 @@ namespace Ecormmerce.Models
         {
             _logger = logger;
             _context = context;
+        }
+
+        public async Task InsertAsync(Product product)
+        {
+             try
+            {
+                product.Id = product.Id == Guid.Empty ? Guid.NewGuid() : product.Id;
+
+                _context.Products.Add(product);
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "{0} : {1}", nameof(ProductService.InsertAsync), e.Message);
+            }
         }
 
 

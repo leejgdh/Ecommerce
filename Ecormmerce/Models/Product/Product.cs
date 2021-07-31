@@ -15,7 +15,7 @@ namespace Ecormmerce.Models
         [Key]
         [JsonProperty("id")]
         public Guid Id { get; set; }
-        
+
         [Required(ErrorMessage = "{0}은 필수 입력값입니다.")]
         [Display(Name = "상품명", Description = "판매 상품명")]
         public string Name { get; set; }
@@ -35,7 +35,7 @@ namespace Ecormmerce.Models
 
         [Required(ErrorMessage = "{0}은 필수 입력값입니다.")]
         [Display(Name = "상품 등록가격", Description = "판매 상품의 가격입니다.")]
-        public double Price{get; set;}
+        public double Price { get; set; }
 
         [Display(Name = "할인율", Description = "기본 판매가를 기준으로 한 할인율입니다.")]
         public double? DiscountRate { get; set; }
@@ -53,38 +53,37 @@ namespace Ecormmerce.Models
         [Display(Name = "상품의 무게", Description = "판매 상품의 무게입니다.")]
         public double? Weight { get; set; }
 
-        [NotMapped]
-        [Display(Name = "상품의 썸네일 이미지 URL입니다.")]
-        public IList<string> ThumbnailImageUrls { get; set; }
+        [Display(Name = "크기", Description = "상품의 크기입니다.")]
+        public _Dimention Dimention { get; set; }
+
+        // [Display(Name = "상품의 썸네일 이미지 URL입니다.")]
+        // public ICollection<string> ThumbnailImageUrls { get; set; }
 
         [Display(Name = "옵션 타입")]
         [EnumDataType(typeof(EVariationType))]
         [JsonConverter(typeof(StringEnumConverter))]
         public EVariationType? VariationType { get; set; }
 
-        [NotMapped]
-        [Display(Name = "옵션명")]
-        public IList<string> VariationGroups { get; set; }
+        // [Display(Name = "옵션명")]
+        // public ICollection<string> VariationGroups { get; set; }
 
-        [NotMapped]
-        public IList<string> ImageUrls { get; set; }
+        // [NotMapped]
+        // public ICollection<string> ImageUrls { get; set; }
 
         [NotMapped]
         [Display(Name = "옵션")]
-        public IList<Variation> Variations { get; set; }
+        public ICollection<_Variation> Variations { get; set; }
 
         [Required(ErrorMessage = "{0}은 필수 입력값입니다.")]
         [Display(Name = "카테고리 아이디", Description = "상품의 카테고리")]
-        [JsonConverter(typeof(StringConverter))]
         public Guid CategoryId { get; set; }
-        
+
         [Required]
         public Guid ShopId { get; set; }
 
-        public Shop Shop { get; set; }
-
         public class _Dimention
         {
+
             [Display(Name = "세로")]
             public double Length { get; set; }
 
@@ -93,6 +92,63 @@ namespace Ecormmerce.Models
 
             [Display(Name = "높이")]
             public double Height { get; set; }
+        }
+
+
+
+        public class _Variation
+        {
+            
+            public string GroupName { get; set; }
+
+            [Required(ErrorMessage = "{0}은 필수 입력값입니다.")]
+            [Display(Name = "옵션명")]
+            public string Name { get; set; }
+
+            [Display(Name = "옵션 관리번호 (SKU)")]
+            public string Sku { get; set; }
+
+            [Required]
+            [Display(Name = "화폐단위", Description = "미입력시 KRW")]
+            [EnumDataType(typeof(ECurrency))]
+            [JsonConverter(typeof(StringEnumConverter))]
+            public ECurrency Currency { get; set; }
+
+            [Display(Name = "상품 원가격")]
+            public double? BasePrice { get; set; }
+
+            [Required(ErrorMessage = "{0}은 필수 입력값입니다.")]
+            [Display(Name = "기본 판매가")]
+            public double Price { get; set; }
+
+            [Display(Name = "할인율")]
+            public double? DiscountRate { get; set; }
+
+            [Display(Name = "할인가", Description = "판매 할인가 절대값")]
+            public double? DiscountPrice { get; set; }
+
+
+            [Display(Name = "배송비")]
+            public double? LogisticPrice { get; set; }
+
+            [Display(Name = "옵션 설명")]
+            public string Description { get; set; }
+
+            [Display(Name = "무게")]
+            public double? Weight { get; set; }
+
+            [Display(Name = "이미지 URL")]
+            public ICollection<_Image> ImageUrls { get; set; }
+
+
+
+            public class _Image
+            {
+
+                public string Url { get; set; }
+            }
+
+
         }
     }
 

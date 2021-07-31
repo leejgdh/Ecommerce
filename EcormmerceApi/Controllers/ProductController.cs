@@ -34,6 +34,14 @@ namespace EcormmerceApi.Controllers
             return Ok(true);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> InsertAsync([FromBody] Product product)
+        {
+            await _productService.InsertAsync(product);
+
+            return NoContent();
+        }
+
         // [HttpPost]
         // public async Task<IActionResult> InsertAsync(Product request){
 
