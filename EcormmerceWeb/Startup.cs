@@ -32,6 +32,7 @@ namespace EcormmerceWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
             else
             {
