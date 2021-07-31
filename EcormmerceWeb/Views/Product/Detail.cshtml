@@ -11,7 +11,7 @@
 
     </div>
 
-    <form class="card-body">
+    <form id="DetailWrapper" class="card-body">
 
         <div class="form-group row">
             <div class="col-md-4">
@@ -181,7 +181,7 @@
         </div>
 
         <div>
-            <button class="btn btn-block btn-primary">저장</button>
+            <button id="SaveBtn" type="button"  class="btn btn-block btn-primary">저장</button>
         </div>
 
     </form>
@@ -192,6 +192,34 @@
 
 @section Scripts{
 
-<script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    
+
+
+    <script>
+
+        $(document).on('click','#SaveBtn',Save);
+
+        function Save(){
+            
+            let data = NDH.GetJsData($('#DetailWrapper'));
+
+            console.log(data);
+        }
+
+        $(document).on('click','#VariationModalSaveBtn',VariationSave);
+
+
+        function VariationSave(){
+
+            let data = NDH.GetJsData($('#VariationModalWrapper'));
+
+            console.log(data);
+        }
+
+
+
+    </script>
 }

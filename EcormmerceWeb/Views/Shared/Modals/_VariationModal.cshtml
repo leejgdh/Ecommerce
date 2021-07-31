@@ -2,14 +2,14 @@
 
 <div id="VariationModal" class="modal" tabindex="-1">
   <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+    <form class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Variation </h5>
+        <h5 class="modal-title">옵션</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div id="VariationModalWrapper" class="modal-body">
 
         <div class="form-group row">
             <div class="col-md-6">
@@ -87,8 +87,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary">저장</button>
+        <button id="VariationModalSaveBtn" type="submit" class="btn btn-primary">저장</button>
       </div>
-    </div>
+    </form>
   </div>
 </div>

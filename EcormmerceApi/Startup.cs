@@ -17,6 +17,8 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using System.Text.Json.Serialization;
+using System.Reflection;
+using System.IO;
 
 namespace EcormmerceApi
 {
@@ -58,6 +60,11 @@ namespace EcormmerceApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EcormmerceApi", Version = "v1" });
+                
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             services.AddTransient<IProductService, ProductService>();

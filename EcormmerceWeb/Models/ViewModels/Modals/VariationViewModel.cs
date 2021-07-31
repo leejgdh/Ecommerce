@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace EcormmerceWeb.Models.ViewModels.Modals
 {
 
@@ -6,8 +8,9 @@ namespace EcormmerceWeb.Models.ViewModels.Modals
 
         public VariationViewModel()
         {
-            
+
         }
+
         
 
     }

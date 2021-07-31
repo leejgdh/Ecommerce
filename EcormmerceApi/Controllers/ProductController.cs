@@ -34,6 +34,11 @@ namespace EcormmerceApi.Controllers
             return Ok(true);
         }
 
+        /// <summary>
+        /// 데이터 하나 추가
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> InsertAsync([FromBody] Product product)
         {
